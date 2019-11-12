@@ -3,6 +3,7 @@ def greeting
     puts "Hello! Welcome back"
     puts "What would you like to do today?"
     puts_options
+    choice = gets.chomp
 end
 
 def puts_options
@@ -10,3 +11,5 @@ def puts_options
         puts "#{i+1}. #{option}"
     end 
 end
+
+

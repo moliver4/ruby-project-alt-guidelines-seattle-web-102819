@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_12_230540) do
+ActiveRecord::Schema.define(version: 2019_11_12_234150) do
 
   create_table "chores", force: :cascade do |t|
     t.integer "kid_id"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2019_11_12_230540) do
     t.string "name"
     t.integer "age"
     t.integer "skill_level"
-    t.datetime "birthday"
   end
 
   create_table "tasks", force: :cascade do |t|
