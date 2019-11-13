@@ -11,4 +11,8 @@ class Chore < ActiveRecord::Base
         Task.all.find {|task| task.id == self.task_id}
     end
 
+    def self.find_chore(task, kid)
+        self.all.find {|chore| chore.task == task && chore.kid == kid}
+    end
+
 end
