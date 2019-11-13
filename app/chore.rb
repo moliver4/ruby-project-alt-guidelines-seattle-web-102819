@@ -3,6 +3,7 @@ class Chore < ActiveRecord::Base
     belongs_to :tasks
 
     #returns a kid matching this chore
+    
     def kid
         Kid.all.find {|kid| kid.id == self.kid_id}
     end
