@@ -8,3 +8,4 @@ gem "require_all"
 gem "faker"
 gem "rake"
 gem 'activerecord', "~>5.2.3"
+gem 'activerecord-reset-pk-sequence'

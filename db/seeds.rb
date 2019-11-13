@@ -1,5 +1,9 @@
-Kid.destroy_all
+Chore.destroy_all
 Task.destroy_all
+Kid.destroy_all
+Chore.reset_pk_sequence
+Task.reset_pk_sequence
+Kid.reset_pk_sequence
 
 Kid.create(name: "Becky", age: 19, skill_level: 3)
 Kid.create(name: "Brian", age: 15, skill_level: 3)
@@ -17,4 +21,11 @@ Task.create(title: "Start Laundry", difficulty: 3, reward: 3)
 Task.create(title: "Fold Laundry", difficulty: 3, reward: 5)
 Task.create(title: "Pick Up Toys", difficulty: 1, reward: 1)
 Task.create(title: "Walk Dog", difficulty: 3, reward: 1)
+
+Chore.create(kid_id: 2, task_id: 7, completed: false)
+Chore.create(kid_id: 2, task_id: 4, completed: false)
+Chore.create(kid_id: 1, task_id: 7, completed: false)
+Chore.create(kid_id: 1, task_id: 8, completed: false)
+Chore.create(kid_id: 3, task_id: 10, completed: false)
+
 
