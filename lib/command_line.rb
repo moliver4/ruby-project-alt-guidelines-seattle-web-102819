@@ -15,8 +15,7 @@ end
 
 def options  #RETURNS INPUT
     while true do
-        puts "    ************************************************************************"
-        puts " "
+        new_line(2)
         puts "      **** Please Type a Choice OR a Number and press ENTER ****        "
         puts " "
         puts "[1]    *   CREATE NEW CHORE   *        Assign a task."
@@ -33,7 +32,7 @@ def options  #RETURNS INPUT
         puts " "
         puts "[7]    *      EDIT TASKS      *        View and edit your Task List"
         puts " "
-        puts "[8]    *      EDIT KIDS      *        View and edit your Children List"
+        puts "[8]    *      EDIT KIDS       *        View and edit your Children List"
         puts " " 
         puts_exit_option
         puts "Please Enter Input Here:"

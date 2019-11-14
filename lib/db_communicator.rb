@@ -390,6 +390,7 @@ def add_kid
     end
     age = input.to_i
     condition = true
+    skill_level = 0
     while condition do
         puts "  Please enter #{name}'s skill level. (1-3)"
         input = $stdin.gets.chomp.downcase
@@ -397,6 +398,9 @@ def add_kid
             return
         end
         skill_level = input.to_i
+        if skill_level > 0 && skill_level < 4
+            condition = false
+        end
     end
     test_kid = Kid.find_by(name: name, age: age, skill_level: skill_level)
     if test_kid 
