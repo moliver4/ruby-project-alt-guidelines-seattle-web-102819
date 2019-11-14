@@ -8,6 +8,10 @@ def create_chore
     if kid.class != kid
         return
     end
+    if task.difficulty > kid.skill_level
+        puts "Sorry, your kid is not skilled enough to do that!"
+        return
+    end
     chore = Chore.create(kid_id: kid.id, task_id: task.id, completed: complete)
     puts "Your chore has been added!"
     puts "#{chore.kid.name} has been assigned #{chore.task.title}."
@@ -50,7 +54,7 @@ end
 
 def print_all_chores
     Chore.all.each_with_index do |chore, i|
-        puts "#{chore.completed ? "\u2713" : "\u02DF"} #{i+1}. #{chore.task.title} by #{chore.kid.name}"
+        puts "#{chore.completed ? "\u2713" : "\u02DF"} #{i+1}. #{chore.task.title} \u2023 #{chore.kid.name}"
         puts "      Completed: #{chore.completed ? "true" : "false"}"
     end
 end
@@ -60,9 +64,9 @@ def print_chores_by_child(child)
     chores = child.chores
     empty_list(chores)
     chores.each_with_index do |chore, i|
-        puts "#{i+1}. #{chore.task.title} by #{chore.kid.name}"
-        puts "      Completed: #{chore.completed ? "true" : "false"}"
-        puts "      Reward: $#{chore.task.reward}.00"
+        puts "#{chore.completed ? "\u2713" : "\u02DF"} #{i+1}. #{chore.task.title}"
+        puts "     Completed: #{chore.completed ? "True" : "False"}"
+        puts "     Reward: $#{chore.task.reward}.00"
         puts ""
     end
 end
@@ -92,6 +96,7 @@ def remove_task
 end
 
 def delete_chore
+    puts "Which Chore Would You Like To Delete?"
     chore = which_chore?
     chore.destroy
 end
@@ -228,6 +233,22 @@ end
 def empty_list(list)
     if list.length < 1
         puts ""
-        puts "This list is currently empty!"
+        puts "This list is currently empty! "
+        puts "    Whoot! No Chores!"
+        puts "  "
+    end
+end
+
+def print_chores_per_child
+    kids = Kid.all
+    kids.each do |kid|
+        puts ""
+        puts ""
+        puts "          **********"
+        puts ""
+        puts "        #{kid.name.upcase}"
+        puts " "
+        print_chores_by_child(kid)
+
     end
 end
