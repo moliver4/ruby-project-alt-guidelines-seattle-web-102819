@@ -142,18 +142,30 @@ def add_task
         return
     end
     title = input.capitalize
-    puts "  Please enter a reward amount (1-5)"
-    input = $stdin.gets.chomp.downcase
-    if input == "back" || input == "no" || input == "exit"
-        return
+    condition = true
+    while condition do
+        puts "  Please enter #{title}'s reward amount. (0-5)"
+        input = $stdin.gets.chomp.downcase
+        if input == "back" || input == "no" || input == "exit"
+            return
+        end
+        reward = input.to_i
+        if reward >= 0 && reward < 6
+            condition = false
+        end
     end
-    reward = input.to_i
-    puts "  Please enter difficulty"
-    input = $stdin.gets.chomp.downcase
-    if input == "back" || input == "no" || input == "exit"
-        return
+    condition = true
+    while condition do
+        puts "  Please enter #{title}'s difficulty level. (1-3)"
+        input = $stdin.gets.chomp.downcase
+        if input == "back" || input == "no" || input == "exit"
+            return
+        end
+        difficulty = input.to_i
+        if difficulty > 0 && difficulty < 4
+            condition = false
+        end
     end
-    difficulty = input.to_i
     test = Task.find_by(title: title, difficulty: difficulty, reward: reward)
     if test 
         puts ""
