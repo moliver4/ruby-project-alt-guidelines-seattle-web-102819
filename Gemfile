@@ -9,3 +9,4 @@ gem "faker"
 gem "rake"
 gem 'activerecord', "~>5.2.3"
 gem 'activerecord-reset-pk-sequence'
+gem 'ruby2d'

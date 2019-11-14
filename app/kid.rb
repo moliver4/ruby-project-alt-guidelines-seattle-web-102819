@@ -15,8 +15,16 @@ class Kid < ActiveRecord::Base
         tasks.map {|task| task.title}
     end
 
+    def completed_chores
+        chores.select {|chore| chore.completed = true}
+    end
+
+    def completed_tasks
+        completed_chores.map {|chore| chore.task}
+    end
+
     def total_reward
-        tasks.map {|task| task.reward}.sum
+        completed_tasks.map{|task| task.reward}.sum
     end
         
 end
