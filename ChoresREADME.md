@@ -3,7 +3,8 @@ Chores Organizer Mod 1 Final Project
 
 Thank You for your interest in my Chores Organizer Project!
 
-This is a command line application that allows the User/Parent to manage and keep track of their chores for their children.
+This is a command line application that allows the User/Parent to manage and keep track of chores for their children.
+Chores are assigned Tasks that can be designated to a Child for a reward. 
 The User/Parent can do any of the following:
 - View all chores
     All, Incomplete, or Complete
@@ -19,10 +20,15 @@ The User/Parent can do any of the following:
     -Deleting a task will delete all associated chores.
 
 ============================================
+
 DEPLOYMENT
 
-After downloading the program and prior to running, please run 'bundle install' in the directory to install necessary gems.
-In the file directory, run 'ruby bin/run.rb'
+After downloading the program onto your computer, please do the following: 
++ Run 'bundle install' in the directory to install necessary gems.
++ Run "rake db:migrate"
++ Run 'rake db:seed' to seed test data
++ Run 'ruby bin/run.rb'
+
 =============================================
 ACKNOWLEDGEMENTS
 This CLI app utilized additional gems:
