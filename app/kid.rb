@@ -3,12 +3,10 @@ class Kid < ActiveRecord::Base
     has_many :tasks, through: :chores
 
 
-    def chores
-        Chore.all.select {|chore| chore.kid == self}
-    end
+    
 
     def tasks
-        chores.map {|chore| chore.task}
+        self.chores.map {|chore| chore.task}
     end
 
     def task_names
@@ -16,7 +14,7 @@ class Kid < ActiveRecord::Base
     end
 
     def completed_chores
-        chores.select {|chore| chore.completed = true}
+        self.chores.select {|chore| chore.completed = true}
     end
 
     def completed_tasks

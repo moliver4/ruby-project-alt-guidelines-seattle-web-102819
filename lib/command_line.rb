@@ -8,7 +8,7 @@
 #greets and gets the answer and 
 def greeting
     new_break
-    puts "          Hello! Welcome back to your Chore Org\u00A9 !"
+    puts "          Hello! Welcome back to your Chore Org \u00A9 !"
     puts "             What would you like to do today?"
     new_break
 end
@@ -35,12 +35,12 @@ def options  #RETURNS INPUT
         puts "[8]    *      EDIT KIDS       *        View and edit your Children List"
         puts " " 
         puts_exit_option
-        puts "Please Enter Input Here:"
+        puts "  Please Enter Input Here:"
         input = $stdin.gets.chomp.downcase
         int = input.to_i
         puts ""
         new_break
-        if input == "exit"
+        if input == "no" || input == "exit"
             goodbye_message
             break
         elsif input == "create new chore" || int == 1
@@ -76,7 +76,7 @@ def options  #RETURNS INPUT
             another_request?
             break
         else 
-            puts "Sorry, please enter valid choice and press ENTER"
+            puts "  Sorry, please enter valid choice and press ENTER"
         end
     end
 end
@@ -247,7 +247,7 @@ end
 
 def goodbye_message
     new_break
-    puts "          Thank you for using Chore Org\u00A9 !"
+    puts "          Thank you for using Chore Org \u00A9 !"
     puts "                  Have a Great Day!"
     puts "                  BYEEEEEEEEEEEEEEE"
     new_break

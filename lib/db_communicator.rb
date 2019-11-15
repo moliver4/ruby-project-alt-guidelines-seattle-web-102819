@@ -1,15 +1,22 @@
 def create_chore
-    puts "Great! Let's create a new Chore!"
-    puts " "
+    puts "  Great! Let's create a new Chore!"
+    new_line
+    puts "  To create a chore, let's assign a task to a child."
+    new_line
+    puts "  First, let's pick the task to assign:"
     task = which_task?
     if task
-        puts " "
+        new_line
+        puts "  Please choose who you would like to assign this task to:"
+        new_line
         kid = which_kid?
         if kid 
             puts " "
             if (task.difficulty) > (kid.skill_level)
                 puts ""
-                puts "Sorry, your kid is not skilled enough to do that!"
+                puts "  Sorry, your kid is not skilled enough to do that!"
+                puts "      #{kid.name}'s skill level: #{kid.skill_level}"
+                puts "      #{task.title}'s difficulty: #{task.difficulty}"
                 puts ""
                 return
             end
@@ -17,29 +24,35 @@ def create_chore
             search = Chore.find_by(kid_id: kid.id, task_id: task.id, completed: complete)
             if search
                 puts ""
-                puts "You already have this chore!"
+                puts "  You already have this chore!"
                 puts ""
-                puts " #{search.completed ? "\u2713" : "\u02DF"}   #{search.task.title}   \u2023   #{search.kid.name}"
+                puts " #{search.completed ? "\u2713" : "\u02DF"}  #{search.task.title}     \u2023     #{search.kid.name}"
+                puts "     #{search.completed ? "Complete" : "Incomplete"}"
+                puts "     Reward: $#{search.task.reward}.00"
+                puts ""
                 return
             end
             chore = Chore.create(kid_id: kid.id, task_id: task.id, completed: complete)
             puts " "
             puts "              Awesome! "
             puts "         Your chore has been added!"
-            puts "  #{chore.kid.name} has been assigned #{chore.task.title}."
+            puts " #{chore.completed ? "\u2713" : "\u02DF"}  #{chore.task.title}     \u2023     #{chore.kid.name}"
+            puts "     #{chore.completed ? "Complete" : "Incomplete"}"
+            puts "     Reward: $#{chore.task.reward}.00"
+            puts ""
     
         end
     end
 end
 
 def complete_chore
-    puts "Please Choose a Chore to Complete"
+    puts "  Please Choose a Chore to Complete"
     new_line
     chore = which_chore?
     if chore
         if chore.completed == true
             new_line
-            puts "This chore is already completed!"
+            puts "  This chore is already completed!"
             return
         end
         chore.update(completed: true)
@@ -74,7 +87,7 @@ end
 def yesno #returns boolean
     while true do
         puts ""
-        puts "Please Enter Yes or No"
+        puts "  Please Enter Yes or No"
         puts ""
         
         input = $stdin.gets.chomp.downcase
@@ -90,7 +103,7 @@ end
 
 def print_all_chores(array)
     if array.length < 1
-        puts "Wow! Looks like you have no chores right now."
+        puts "  Wow! Looks like you have no chores right now."
         return
     end
     new_line(2)
@@ -163,7 +176,7 @@ def add_task
     test = Task.find_by(title: title, difficulty: difficulty, reward: reward)
     if test 
         puts ""
-        puts "You already have this chore!"
+        puts "  You already have this task!"
         puts ""
         puts "  Task: #{test.title}, Difficulty: #{test.difficulty}, Reward: $#{test.reward}.00"
         return
@@ -198,6 +211,9 @@ end
 
 def delete_chore
     new_line
+    if empty_list(Chore.all)
+        return
+    end
     puts "  Which Chore Would You Like To Delete?"
     chore = which_chore?
     if chore
@@ -213,7 +229,7 @@ end
 
 def delete_all_chores
     puts ""
-    puts "You have chosen to delete ALL chores."
+    puts "  You have chosen to delete ALL chores."
     if confirm_delete
         Chore.destroy_all
         puts "  All Chores Have Been Deleted."
@@ -234,8 +250,8 @@ end
 def complete?
     puts " "
     while true do
-        puts "Is the task Completed?"
-        puts "Enter YES or NO"
+        puts "  Is the task Completed?"
+        puts "  Enter YES or NO"
         input = $stdin.gets.chomp.downcase
         if input == "yes" || input == "y"
             return true
@@ -244,8 +260,8 @@ def complete?
             return false
             break
         else
-            puts "!!!"
-            puts "Sorry. Not a valid input."
+            puts "      !!!"
+            puts "  Sorry. Not a valid input."
         end
     end
 end
@@ -255,7 +271,7 @@ def which_chore? #returns a chore object
     while true do 
         print_all_chores(Chore.all)
         puts " "
-        puts "Please enter the Number for the Chore: "
+        puts "  Please enter the Number for the Chore: "
         go_back_option
         puts " "
         input = $stdin.gets.chomp
@@ -271,8 +287,8 @@ def which_chore? #returns a chore object
             break
         else 
             new_line(2)
-            puts "!!!!"
-            puts "Sorry! Please enter a valid number for your Chore!!"
+            puts "      !!!!"
+            puts "  Sorry! Please enter a valid number for your Chore!!"
         end
     end
 end
@@ -280,6 +296,9 @@ end
 
 def print_kids
     new_line(2)
+    if empty_list(Kid.all)
+        return
+    end
     puts " *****        CHILDREN        *****"
     new_line
     Kid.all.each_with_index do |kid, index|
@@ -290,10 +309,10 @@ end
 
 def which_kid? #returns a kid object
     while true do 
-        puts "Here are your Children:"
+        puts "  Here are your Children:"
         print_kids
         puts " "
-        puts "Please enter the Number for the Child: "
+        puts "  Please enter the Number for the Child: "
         go_back_option
         puts " "
         input = $stdin.gets.chomp
@@ -309,8 +328,8 @@ def which_kid? #returns a kid object
             break
         else 
             new_line(2)
-            puts "!!!!"
-            puts "Sorry, please enter a valid number."
+            puts "      !!!!"
+            puts "  Sorry, please enter a valid number."
         end
     end
 end
@@ -323,6 +342,9 @@ end
 
 def print_tasks
     new_line(2)
+    if empty_list(Task.all)
+        return
+    end
     puts "  *****    Available Tasks     *****"
     Task.all.each_with_index do |task, index|
         puts "  "
@@ -331,10 +353,10 @@ def print_tasks
 end
 
 def which_task?
-    while true do 
+    while true do
         print_tasks
         puts " "
-        puts "Please Enter the Number of the Task You Would Like: "
+        puts "  Please Enter the Number of the Task You Would Like: "
         go_back_option
         puts " "
         input = $stdin.gets.chomp
@@ -350,8 +372,8 @@ def which_task?
             break
         else 
             new_line(2)
-            puts "!!!!"
-            puts "Sorry, please enter a valid number for your Task."
+            puts "      !!!!"
+            puts "  Sorry, please enter a valid number for your Task."
         end
     end
 end
@@ -359,9 +381,9 @@ end
 def empty_list(list)
     if list.length < 1
         puts ""
-        puts "This list is currently empty! "
-        puts "    Whoot! No Chores!"
+        puts "  This list is currently empty! "
         puts "  "
+        return true
     end
 end
 

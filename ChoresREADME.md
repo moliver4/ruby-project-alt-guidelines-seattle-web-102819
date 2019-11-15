@@ -1,5 +1,5 @@
 Chores Organizer Mod 1 Final Project 
-************************************
+==============================================
 
 Thank You for your interest in my Chores Organizer Project!
 
@@ -14,9 +14,22 @@ The User/Parent can do any of the following:
 - Update a chore to complete once it is done.
 - Calculate the amount of money/reward the child has earned via completed chores.
 - Add/Delete Children (Name, Age, Skill level)
+    -Deleting a child will delete all associated chores.
 - Add/Delete Tasks (Title, Difficulty, Reward)
+    -Deleting a task will delete all associated chores.
 
 ============================================
-After downloading the program and prior to running, please run bundle install in the directory to install necessary gems.
+DEPLOYMENT
+
+After downloading the program and prior to running, please run 'bundle install' in the directory to install necessary gems.
+In the file directory, run 'ruby bin/run.rb'
+=============================================
+ACKNOWLEDGEMENTS
+This CLI app utilized additional gems:
++  https://github.com/splendeo/activerecord-reset-pk-sequence 
++  https://github.com/ruby2d/ruby2d -Thanks Michael for help with implementation of the .wav sound file!
++  https://github.com/faker-ruby/faker
+
+
 
 
