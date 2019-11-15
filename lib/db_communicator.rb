@@ -284,7 +284,7 @@ def print_kids
     new_line
     Kid.all.each_with_index do |kid, index|
         puts "  "
-        puts "[#{index + 1}] #{kid.name}     skill level: #{kid.skill_level}"
+        puts "[#{index + 1}]   #{kid.name}   Age: #{kid.age}    Skill Level: #{kid.skill_level}"
     end
 end
 
