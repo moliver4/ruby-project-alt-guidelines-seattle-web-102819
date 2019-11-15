@@ -34,38 +34,32 @@ end
 
 def complete_chore
     puts "Please Choose a Chore to Complete"
+    new_line
     chore = which_chore?
     if chore
+        if chore.completed == true
+            new_line
+            puts "This chore is already completed!"
+            return
+        end
         chore.update(completed: true)
+        new_line
+        puts "                 YAY!"
         puts "\u02DF  #{chore.task.title}   \u2023   #{chore.kid.name} has been completed."
-
+        puts "    $#{chore.task.reward}.00 has been earned"
     end
 end
 
 def print_incomplete
     incomplete = incomplete_chores
-    empty_list(incomplete)
-    puts ""
-    puts "INCOMPLETE CHORES: "
-
-    incomplete.each do |chore|
-        puts ""
-        puts "\u02DF  #{chore.task.title}   \u2023   #{chore.kid.name}"
-    end
+    print_all_chores(incomplete)
 end
 
 
 
 def print_complete
     complete = complete_chores
-    empty_list(complete)
-    puts ""
-    puts "COMPLETE CHORES: "
-
-    complete.each do |chore|
-        puts ""
-        puts "\u02DF  #{chore.task.title}   \u2023   #{chore.kid.name}"
-    end
+    print_all_chores(complete)
 end
 
 
@@ -102,7 +96,7 @@ def print_all_chores(array)
     new_line(2)
     puts "     *****    CURRENT CHORES      *****"
     array.each_with_index do |chore, i|
-        puts "#{chore.completed ? "\u2713" : "\u02DF"} #{i+1}. #{chore.task.title}  \u2023   #{chore.kid.name}"
+        puts "#{chore.completed ? "\u2713" : "\u02DF"} #{i+1}. #{chore.task.title}     \u2023     #{chore.kid.name}"
         puts "     #{chore.completed ? "Complete" : "Incomplete"}"
         puts "     Reward: $#{chore.task.reward}.00"
         puts ""
@@ -127,7 +121,7 @@ def calculate_reward
         new_line
         sound = Music.new("cramer-03.wav")
         sound.play
-        puts "      You owe #{kid.name} a total of $#{kid.total_reward}.00!"
+        puts "      #{kid.name} earned a total of $#{kid.total_reward}.00!"
         new_line 
     end
 end
@@ -257,9 +251,8 @@ def complete?
 end
 
 def which_chore? #returns a chore object
-    puts "Please Select a Chore!"
+    puts "          Please Select a Chore!"
     while true do 
-        puts ""
         print_all_chores(Chore.all)
         puts " "
         puts "Please enter the Number for the Chore: "
